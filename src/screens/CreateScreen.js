@@ -19,7 +19,6 @@ const CreateScreen = ({ navigation, addData }) => {
 
     <View>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
-        <Text> CreateScreen </Text>
         <TextInput
           placeholder='enter'
           style={styles.input}

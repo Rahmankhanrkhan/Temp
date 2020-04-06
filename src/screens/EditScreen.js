@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { View, Text, Button, StyleSheet } from 'react-native'
+import { View, Button, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { TouchableWithoutFeedback, TextInput } from 'react-native-gesture-handler'
 import { editData } from '../actions/actions'
 
-const EditScreen = ({ navigation, data, editData}) => {
+const EditScreen = ({ navigation, data, editData }) => {
   console.log('getparam', navigation.getParam('id'))
   const id = navigation.getParam('id')
   const detail = data.find(data => data.id === id)
@@ -19,11 +19,9 @@ const EditScreen = ({ navigation, data, editData}) => {
 
   return (
     <View>
+      
+
       <TouchableWithoutFeedback  >
-      <Text>{detail.id} </Text>
-      <Text>{detail.title} </Text>
-      <Text>{detail.author} </Text>
-        <Text> {id} </Text>
         <TextInput
           placeholder='enter'
           style={styles.input}

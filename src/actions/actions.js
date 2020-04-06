@@ -1,4 +1,4 @@
-import { add_Data, edit_Data  } from "./types"
+import { add_Data, edit_Data, delete_data  } from "./types"
 
 // import { add_Data } from './types'
 
@@ -18,5 +18,12 @@ export const editData = (title, author, id) => {
     payload:{title,
     author,
     id}
+  }
+}
+
+export const deleteData = (id) =>{
+  return{
+    type: delete_data,
+    payload:{id}
   }
 }
