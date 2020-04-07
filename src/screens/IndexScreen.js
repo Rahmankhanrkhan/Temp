@@ -18,7 +18,7 @@ const IndexScreen = ({ navigation, data, deleteData }) => {
         renderItem={({ item }) => {
           return (
             <ScrollView
-            showsVerticalScrollIndicator ={false} >
+              showsVerticalScrollIndicator={false} >
               <View style={styles.row} >
                 <TouchableOpacity onPress={() => navigation.navigate('Detail', { id: item.id })} >
                   <Text style={styles.text} >
