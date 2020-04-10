@@ -8,16 +8,19 @@ import FormField from '../component/FormField';
 const CreateScreen = ({ navigation, addData }) => {
 
   const onSubmit = (title, author) => {
-    addData(title, author);
+    const elements = {
+      title, author
+    }
+    addData(elements);
     navigation.pop()
   }
 
   return (
     <View>
-    <FormField
-      buttonText = 'Add'
-      onSubmit = {onSubmit}
-    />
+      <FormField
+        buttonText='Add'
+        onSubmit={onSubmit}
+      />
     </View>
   )
 }

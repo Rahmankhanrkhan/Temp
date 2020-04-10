@@ -1,29 +1,28 @@
-import { add_Data, edit_Data, delete_data  } from "./types"
+import { add_Data, edit_Data, delete_data } from "./types"
 
 // import { add_Data } from './types'
 
-export const addData = (title, author) => {
-  console.log('ACTIONS', title)
+export const addData = (elements) => {
+  console.log('ACTIONS', elements)
   return {
     type: add_Data,
-    payload :{title,
-    author}
+    payload: { elements }
   }
 }
 
-export const editData = (title, author, id) => {
-  console.log('Edit action', title, author,id)
+export const editData = (elements) => {
+  console.log('Edit action', elements)
   return {
     type: edit_Data,
-    payload:{title,
-    author,
-    id}
+    payload: {
+      elements
+    }
   }
 }
 
-export const deleteData = (id) =>{
-  return{
-    type: delete_data,
-    payload:{id}
-  }
-}
+// export const deleteData = (id) =>{
+//   return{
+//     type: delete_data,
+//     payload:{id}
+//   }
+// }

@@ -7,9 +7,12 @@ import FormField from '../component/FormField'
 const EditScreen = ({ navigation, data, editData }) => {
 
   const id = navigation.getParam('id')
-  
+
   const onSubmit = (title, author) => {
-    editData(title, author, id)
+  const elements = {
+   title, author,id
+}
+    editData(elements)
     navigation.pop()
   }
 
