@@ -1,6 +1,5 @@
 import { add_Data, edit_Data, delete_data } from "./types"
 
-// import { add_Data } from './types'
 
 export const addData = (elements) => {
   console.log('ACTIONS', elements)
@@ -20,9 +19,9 @@ export const editData = (elements) => {
   }
 }
 
-// export const deleteData = (id) =>{
-//   return{
-//     type: delete_data,
-//     payload:{id}
-//   }
-// }
+export const deleteData = (id) =>{
+  return{
+    type: delete_data,
+    payload:{id}
+  }
+}

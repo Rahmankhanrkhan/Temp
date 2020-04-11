@@ -1,28 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View } from 'react-native'
 import { addData } from '../actions/actions';
 import { connect } from 'react-redux';
 import FormField from '../component/FormField';
 
 
-const CreateScreen = ({ navigation, addData }) => {
+class CreateScreen extends Component {
 
-  const onSubmit = (title, author) => {
+  onSubmit = (title, author) => {
+    const { navigation, addData } = this.props
     const elements = {
       title, author
     }
     addData(elements);
     navigation.pop()
   }
-
-  return (
-    <View>
-      <FormField
-        buttonText='Add'
-        onSubmit={onSubmit}
-      />
-    </View>
-  )
+  render() {
+    return (
+      <View>
+        <FormField
+          buttonText='Add'
+          onSubmit={this.onSubmit}
+        />
+      </View>
+    )
+  }
 }
 
-export default connect(null, { addData })(CreateScreen)
+const mapStateToProps = state => {
+  return {
+    data: state.data
+  }
+}
+
+export default connect(mapStateToProps, { addData })(CreateScreen)

@@ -15,8 +15,8 @@ export const actionReducer = (state = [], action) => {
       return state.map(data => data.id === action.payload.elements.id
         ? action.payload.elements : data
       )
-    // case delete_data:
-    //   return state.filter(data => data.id !== action.payload.id )  
+    case delete_data:
+      return state.filter(data => data.id !== action.payload.id)
     default:
       return state;
   }
