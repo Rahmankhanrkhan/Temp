@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { editData } from '../actions/actions'
 import FormField from '../component/FormField'
+import { bookDb } from '../actions/types'
 
 const EditScreen = ({ navigation, data, editData }) => {
 
@@ -13,6 +14,7 @@ const EditScreen = ({ navigation, data, editData }) => {
    title, author,id
 }
     editData(elements)
+    bookDb.child(elements.id).set(elements)
     navigation.pop()
   }
 

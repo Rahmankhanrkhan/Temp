@@ -19,9 +19,9 @@ export const editData = (elements) => {
   }
 }
 
-export const deleteData = (id) =>{
-  return{
+export const deleteData = (id) => {
+  return {
     type: delete_data,
-    payload:{id}
+    payload: { id }
   }
 }

@@ -3,12 +3,12 @@ import { add_Data, edit_Data, delete_data, } from "../actions/types";
 export const actionReducer = (state = [], action) => {
   switch (action.type) {
     case add_Data:
-      const { title, author } = action.payload.elements;
-      console.log('ACTION REDUCER', title)
+      const { title, author, id } = action.payload.elements;
+      console.log('ACTION REDUCER', id)
       return [...state, {
         title,
         author,
-        id: new Date().getTime()
+        id
       }];
     case edit_Data:
       console.log('action reducer', action)
