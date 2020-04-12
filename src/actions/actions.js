@@ -1,11 +1,11 @@
 import { add_Data, edit_Data, delete_data } from "./types"
 
 
-export const addData = (elements) => {
-  console.log('ACTIONS', elements)
+export const addData = (books) => {
+  console.log('ACTIONS', books)
   return {
     type: add_Data,
-    payload: { elements }
+    payload: { books }
   }
 }
 
@@ -20,8 +20,9 @@ export const editData = (elements) => {
 }
 
 export const deleteData = (id) => {
+  console.log('ACTION DELETE', id)
   return {
     type: delete_data,
-    payload: { id }
+    id
   }
 }

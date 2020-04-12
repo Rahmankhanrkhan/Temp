@@ -3,20 +3,32 @@ import { add_Data, edit_Data, delete_data, } from "../actions/types";
 export const actionReducer = (state = [], action) => {
   switch (action.type) {
     case add_Data:
-      const { title, author, id } = action.payload.elements;
-      console.log('ACTION REDUCER', id)
-      return [...state, {
-        title,
-        author,
-        id
-      }];
-    case edit_Data:
-      console.log('action reducer', action)
-      return state.map(data => data.id === action.payload.elements.id
-        ? action.payload.elements : data
-      )
+      const { books } = action.payload
+      console.log('books in reducer:::', books)
+
+      const details = []
+      for (let key in books) {
+        const title = books[key].title
+        const author = books[key].author
+        const id = books[key].id
+        details.push({
+          title,
+          author,
+          id
+        })
+      }
+      console.log('Book:::', details)
+      console.log('ACTION REDUCER')
+      return {
+        ...state,
+        books: details
+      }
+
     case delete_data:
-      return state.filter(data => data.id !== action.payload.id)
+      const { id } = action;
+      console.log("REDUCER ID :", id);
+      console.log('FILTER :', state.books.filter(book => book.id !== id))
+      return { books: state.books.filter(book => book.id !== id) } 
     default:
       return state;
   }

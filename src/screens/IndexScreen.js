@@ -6,13 +6,15 @@ import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { deleteData } from '../actions/actions';
 
 const IndexScreen = ({ navigation, data, deleteData }) => {
-  
+  console.log('DATA', data.books)
+  const { books } = data
   return (
     <View>
       <FlatList
-        data={data}
-        keyExtractor={data => data.id}
+        data={books}
+        keyExtractor={ books => books.id }
         renderItem={({ item }) => {
+          console.log('ITEM :', item.id, item.title)
           return (
             <ScrollView
               showsVerticalScrollIndicator={false} >

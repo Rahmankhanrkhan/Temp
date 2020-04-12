@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, TextInput, Button, StyleSheet, Keyboard } from 'react-native'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import Spacer from './Space'
+import ImagePickerComp from './ImagePickerComp'
 
 const FormField = ({ buttonText, onSubmit }) => {
   const [title, setTitle] = useState('')
@@ -11,7 +12,7 @@ const FormField = ({ buttonText, onSubmit }) => {
     <View>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
         <Spacer>
-        <Text style = {styles.text} >Enter Title </Text>
+          <Text style={styles.text} >Enter Title </Text>
           <TextInput
             placeholder='Title'
             style={styles.input}
@@ -19,7 +20,7 @@ const FormField = ({ buttonText, onSubmit }) => {
           />
         </Spacer>
         <Spacer>
-        <Text style = {styles.text} >Enter Author </Text>
+          <Text style={styles.text} >Enter Author </Text>
 
           <TextInput
             placeholder='Author'
@@ -27,8 +28,9 @@ const FormField = ({ buttonText, onSubmit }) => {
             onChangeText={setAuthor}
           />
         </Spacer>
-        <View style = { styles.button} >
-          { title || author ? <Button
+        {/* <ImagePickerComp/> */}
+        <View style={styles.button} >
+          {title && author ? <Button
             title={buttonText}
             onPress={() => onSubmit(title, author)}
           /> : null}
@@ -46,13 +48,13 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 10
   },
-  button:{
+  button: {
     marginVertical: 10,
     marginHorizontal: 100
   },
-  text:{
+  text: {
     marginHorizontal: 10
-   }
+  }
 })
 
 export default FormField
