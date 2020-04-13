@@ -6,7 +6,8 @@ import Spacer from '../component/Space';
 
 const DetailScreen = ({ navigation, data }) => {
   const id = navigation.getParam('id')
-  const detail = data.find(data => data.id === id)
+  const {books} = data
+  const detail = books.find(info => info.id === id)
   const title = detail.title ? detail.title : <Text>No Data</Text>
   const author = detail.author ? detail.author : <Text>No Data</Text>
   return (

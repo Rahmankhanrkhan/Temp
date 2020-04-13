@@ -24,11 +24,11 @@ export const actionReducer = (state = [], action) => {
         books: details
       }
 
-    case delete_data:
-      const { id } = action;
-      console.log("REDUCER ID :", id);
-      console.log('FILTER :', state.books.filter(book => book.id !== id))
-      return { books: state.books.filter(book => book.id !== id) } 
+    // case delete_data:
+    //   const { id } = action;
+    //   console.log("REDUCER ID :", id);
+    //   console.log('FILTER :', state.books.filter(book => book.id !== id))
+    //   return { books: state.books.filter(book => book.id !== id) } 
     default:
       return state;
   }

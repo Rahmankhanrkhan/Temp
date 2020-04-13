@@ -15,8 +15,6 @@ import fireaBaseConfig from '../config/fireBaseConfig';
 
 const CreateScreen = ({ navigation, addData, data }) => {
 
- 
-
   const updateBooks = () => {
     fireaBaseConfig.on('value', snap => {
       console.log('dbData', snap.val().books)
