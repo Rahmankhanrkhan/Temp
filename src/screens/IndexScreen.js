@@ -9,43 +9,40 @@ import { bookDb } from '../actions/types';
 const IndexScreen = ({ navigation, data }) => {
 
   const { books } = data
-  
+  console.log('BOOKS', books)
 
-
-  const deletion = (item) => {
-    bookDb.child(item.id).remove()
+  const deletion = (id) => {
+    bookDb.child(id).remove();
+    bookDb.child('books')
     // deleteData(item.id)
   }
-  // const child = bookDb === null ? null : bookDb
-  // console.log('CHILD', child)
+  
 
   return (
     <View>
-      {
-        books !== null ?
-          (<FlatList
-            data={books}
-            keyExtractor={books => books.id}
-            renderItem={({ item }) => {
-              console.log('ITEM :', item.id, item.title)
-              return (
-                <ScrollView
-                  showsVerticalScrollIndicator={false} >
-                  <View style={styles.row} >
-                    <TouchableOpacity onPress={() => navigation.navigate('Detail', { id: item.id })} >
-                      <Text style={styles.text} >
-                        {item.title}
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => deletion(item)} >
-                      <Feather name='trash-2' style={styles.icon} />
-                    </TouchableOpacity>
-                  </View>
-                </ScrollView>
-              )
-            }}
-          />) : <Text>Add data</Text>}
+      <FlatList
+        data={books}
+        keyExtractor={books => books.id}
+        renderItem={({ item }) => {
+          //console.log('ITEM :', item.id, item.title)
+          return (
+            <ScrollView
+              showsVerticalScrollIndicator={false} >
+              <View style={styles.row} >
+                <TouchableOpacity onPress={() => navigation.navigate('Detail', { id: item.id })} >
+                  <Text style={styles.text} >
+                    {item.title}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => deletion(item.id)} >
+                  <Feather name='trash-2' style={styles.icon} />
+                </TouchableOpacity>
+              </View>
+            </ScrollView>
+          )
+        }}
+      />
     </View>
   )
 }

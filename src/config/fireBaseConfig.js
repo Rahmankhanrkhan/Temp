@@ -14,5 +14,5 @@ var config = {
 }
 
 const fireaBaseConfig = firebase.initializeApp(config).database().ref('data');
-
+export const storage = firebase.storage()
 export default fireaBaseConfig

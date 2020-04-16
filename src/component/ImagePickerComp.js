@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, View, Button } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import { bookDb } from '../actions/types';
+import { storage } from '../config/fireBaseConfig';
 
 const ImagePickerComp = () => {
   const [state, setState] = useState({ image: null });
@@ -28,28 +30,21 @@ const ImagePickerComp = () => {
     const fileType = uriParts[uriParts.length - 1];
     const name = new Date().getTime() + '.' + fileType
     console.log('name', name)
-    const formData = new FormData();
-    console.log('formData:::', formData);
-    formData.append('file', { uri, name, type: `application/${fileType}` })
-    console.log('formData', formData);
 
-    // const config = {
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded',
-    //     'Accept': 'application/json'
-    //   }
-    // };
-    // try {
-    //   const res = await fetch('http://localhost:3001/upload', { method: 'post', files: formData }, config);
-    //   console.log('RES', res)
-    //   alert('saved')
-    // } catch (err) {
-    //   if (err.response.status === 500) {
-    //     console.log("There was a problem with the server");
-    //   } else {
-    //     console.log('err.response.data.msg', err.response.data.msg)
-    //   }
-    // }
+
+  }
+
+
+  const onImageSelect = () => {
+    pickImage
+  }
+  const imageName = new Date.getTime()
+  const uploadImage = async (uri) => {
+    const response = await fetch(uri)
+    const blob = await response.blob()
+
+    const ref = storage.ref().child('images/' + imageName)
+    return ref.put(blob)
   }
 
 
@@ -75,7 +70,8 @@ const ImagePickerComp = () => {
       {state.image ?
         (
           <View style={styles.button} >
-            <Button title='change' onPress={pickImage} />
+            <Button title='change' onPress={onImageSelect} />
+            {/* <Button title='save' onPress={() => uploadImage(state.image.uri)} /> */}
           </View>
         ) : null
       }
