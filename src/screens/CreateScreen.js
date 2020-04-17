@@ -10,7 +10,7 @@ import { imageUrl } from '../actions/wordAction';
 
 
 const CreateScreen = ({ navigation, data, word, addData, imageUrl }) => {
-  console.log('ctr svrn', word.url)
+  // console.log('ctr svrn', word.url)
 
   const uploadImage = async (uri, id) => {
     const response = await fetch(uri)
@@ -20,33 +20,28 @@ const CreateScreen = ({ navigation, data, word, addData, imageUrl }) => {
     return ref.put(blob)
   }
   const updateBooks = () => {
+    // console.log('eELEMENTS in UPDate',elements)
     fireaBaseConfig.on('value', snap => {
       console.log('dbData', snap.val().books)
       const books = snap.val().books
       console.log('BOOKDS FROM DB:', books)
       addData(books)
+      navigation.pop()
     })
   }
 
   const onSubmit = (title, author, uri) => {
     const id = new Date().getTime()
-    const elements = {
-      title, author, id
-    }
     uploadImage(uri, id).then(() => {
       storage.ref().child('images/' + id)
         .getDownloadURL().then((url) => {
+          alert('url received')
           console.log('DB URL', url)
-          imageUrl(url)
-        }).then(() => {
-          console.log('loop in URL', word.url)
-          const { url } = word
-          console.log('LOOP in ELEMENTS', elements)
-          const uploadInfo = { ...elements, url }
-          console.log('LOOP in UPLOAD INFO', uploadInfo)
-          bookDb.child(id).set(uploadInfo)
+          const elements = {
+            title, author, id, url
+          }
+          bookDb.child(id).set(elements)
           updateBooks()
-          navigation.pop()
         })
     }
     )

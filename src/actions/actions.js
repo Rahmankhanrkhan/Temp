@@ -9,15 +9,15 @@ export const addData = (books) => {
   }
 }
 
-export const editData = (elements) => {
- // console.log('Edit action', elements)
-  return {
-    type: edit_Data,
-    payload: {
-      elements
-    }
-  }
-}
+// export const editData = (elements) => {
+//  // console.log('Edit action', elements)
+//   return {
+//     type: edit_Data,
+//     payload: {
+//       elements
+//     }
+//   }
+// }
 
 export const deleteData = (id) => {
   //console.log('ACTION DELETE', id)

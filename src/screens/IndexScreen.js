@@ -1,22 +1,22 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Feather } from '@expo/vector-icons';
 import { connect } from 'react-redux'
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { FlatList, ScrollView, TouchableHighlight } from 'react-native-gesture-handler';
 import { bookDb } from '../actions/types';
 // import { deleteData } from '../actions/actions';
 
 const IndexScreen = ({ navigation, data }) => {
 
   const { books } = data
-  console.log('BOOKS', books)
+  console.log('BOOKS det', books)
 
   const deletion = (id) => {
     bookDb.child(id).remove();
     bookDb.child('books')
     // deleteData(item.id)
   }
-  
+
 
   return (
     <View>
@@ -27,17 +27,18 @@ const IndexScreen = ({ navigation, data }) => {
           //console.log('ITEM :', item.id, item.title)
           return (
             <ScrollView
-              showsVerticalScrollIndicator={false} >
-              <View style={styles.row} >
-                <TouchableOpacity onPress={() => navigation.navigate('Detail', { id: item.id })} >
-                  <Text style={styles.text} >
-                    {item.title}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => deletion(item.id)} >
-                  <Feather name='trash-2' style={styles.icon} />
-                </TouchableOpacity>
+              hideVerticalScrollIndicator={true} >
+              <View  >
+                <TouchableHighlight
+                  activeOpacity={0.9}
+                  underlayColor="white"
+                  onPress={() => navigation.navigate('Detail', { id: item.id })}
+                >
+                  <Image
+                    source={{ uri: item.url }}
+                    style={styles.imageStyle}
+                  />
+                </TouchableHighlight>
               </View>
             </ScrollView>
           )
@@ -77,7 +78,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     borderColor: 'grey'
-
+  },
+  imageStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 300,
+    height: 200,
+    marginVertical: 20
+    // resizeMode: "contain"
   }
 })
 
