@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { View, Text, TextInput, Button, StyleSheet, Image, Keyboard } from 'react-native'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import Spacer from './Space'
-import ImagePickerComp from './ImagePickerComp'
 import * as ImagePicker from 'expo-image-picker';
 
 

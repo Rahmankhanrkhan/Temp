@@ -6,7 +6,6 @@ import FormField from '../component/FormField'
 import { bookDb } from '../actions/types'
 
 const EditScreen = ({ navigation, data, editData }) => {
-
   const id = navigation.getParam('id')
 
   const onSubmit = (title, author) => {

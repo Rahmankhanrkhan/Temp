@@ -22,9 +22,9 @@ const IndexScreen = ({ navigation, data }) => {
     <View>
       <FlatList
         data={books}
+        inverted
         keyExtractor={books => books.id}
         renderItem={({ item }) => {
-          //console.log('ITEM :', item.id, item.title)
           return (
             <ScrollView
               hideVerticalScrollIndicator={true} >
@@ -80,21 +80,17 @@ const styles = StyleSheet.create({
     borderColor: 'grey'
   },
   imageStyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignSelf: 'center',
     width: 300,
     height: 200,
-    marginVertical: 20
-    // resizeMode: "contain"
+    marginVertical: 20,
   }
 })
-
 
 const mapStateToProps = state => {
   return {
     data: state.data
   }
 }
-
 
 export default connect(mapStateToProps)(IndexScreen)

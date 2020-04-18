@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { addData } from '../actions/actions';
 import { connect } from 'react-redux';
@@ -6,11 +6,9 @@ import FormField from '../component/FormField';
 import { set } from 'react-native-reanimated';
 import { bookDb } from '../actions/types';
 import fireaBaseConfig, { storage } from '../config/fireBaseConfig';
-import { imageUrl } from '../actions/wordAction';
 
 
-const CreateScreen = ({ navigation, data, word, addData, imageUrl }) => {
-  // console.log('ctr svrn', word.url)
+const CreateScreen = ({ navigation, data, word, addData }) => {
 
   const uploadImage = async (uri, id) => {
     const response = await fetch(uri)
@@ -20,7 +18,6 @@ const CreateScreen = ({ navigation, data, word, addData, imageUrl }) => {
     return ref.put(blob)
   }
   const updateBooks = () => {
-    // console.log('eELEMENTS in UPDate',elements)
     fireaBaseConfig.on('value', snap => {
       console.log('dbData', snap.val().books)
       const books = snap.val().books
@@ -45,8 +42,6 @@ const CreateScreen = ({ navigation, data, word, addData, imageUrl }) => {
         })
     }
     )
-
-
   }
 
   return (
@@ -65,4 +60,4 @@ const mapStateToProps = state => {
     word: state.word
   }
 }
-export default connect(mapStateToProps, { addData, imageUrl })(CreateScreen)
+export default connect(mapStateToProps, { addData })(CreateScreen)
