@@ -1,15 +1,25 @@
-import React from 'react'
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import React, { useEffect } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Feather } from '@expo/vector-icons';
 import { connect } from 'react-redux'
 import { FlatList, ScrollView, TouchableHighlight } from 'react-native-gesture-handler';
 import { bookDb } from '../actions/types';
+import fireaBaseConfig from '../config/fireBaseConfig';
+import { addData } from '../actions/actions';
 // import { deleteData } from '../actions/actions';
 
-const IndexScreen = ({ navigation, data }) => {
+const IndexScreen = ({ navigation, data, addData }) => {
+  const userId = navigation.getParam('userId')
+  console.log('TOKEN UNDEX', navigation.getParam('token'))
+
+  useEffect(() => {
+    fireaBaseConfig.on('value', snap => {
+      const books = snap.val().books;
+      addData(books)
+    })
+  }, [])
 
   const { books } = data
-  console.log('BOOKS det', books)
 
   const deletion = (id) => {
     bookDb.child(id).remove();
@@ -92,4 +102,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(IndexScreen)
+export default connect(mapStateToProps, { addData })(IndexScreen)

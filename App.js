@@ -16,22 +16,25 @@ import AccountScreen from './src/screens/AccountScreen';
 
 import { Provider as AuthProvider } from './src/context/authContext'
 import { setNavigator } from './src/navigationRef';
+import MyUploadScreen from './src/screens/MyUploadScreen';
 
 const navigator = createSwitchNavigator({
   Resolve: ResolveAuthScreen,
   loginflow: createStackNavigator({
     Signup: SignupScreen,
     Signin: SigninScreen,
-    
   }),
   mainflow: createBottomTabNavigator({
     Books: createStackNavigator({
       Index: IndexScreen,
       Create: CreateScreen,
       Detail: DetailScreen,
-      Edit: EditScreen
+      Edit: EditScreen,
     }),
-    Account: AccountScreen
+    MyProfile: createStackNavigator({
+      Account: AccountScreen,
+      Myuplods: MyUploadScreen
+    })
   })
 })
 

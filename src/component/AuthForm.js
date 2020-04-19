@@ -8,7 +8,6 @@ import SafeAreaView from 'react-native-safe-area-view';
 const AuthForm = ({ headerText, onSubmit, submitButtonText, errorMessage }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
-    Spacer
 
     return (
         <SafeAreaView forceInset={{ top: 'always' }} >
@@ -21,7 +20,7 @@ const AuthForm = ({ headerText, onSubmit, submitButtonText, errorMessage }) => {
                     <Spacer>
                         <Input
                             label='Email'
-                            value={email}
+                            value={email} 
                             onChangeText={setEmail}
                             autoCapitalize='none'
                             autoCorrect={false}
