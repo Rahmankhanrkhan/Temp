@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Feather } from '@expo/vector-icons';
 import { connect } from 'react-redux'
 import { FlatList, ScrollView, TouchableHighlight } from 'react-native-gesture-handler';
@@ -17,13 +17,12 @@ const IndexScreen = ({ navigation, data }) => {
     // deleteData(item.id)
   }
 
-
   return (
     <View>
       <FlatList
         data={books}
         inverted
-        keyExtractor={books => books.id}
+        keyExtractor={books => books.id.toString()}
         renderItem={({ item }) => {
           return (
             <ScrollView

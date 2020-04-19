@@ -12,9 +12,9 @@ const EditScreen = ({ navigation, data, editData }) => {
   const elements = {
    title, author,id
 }
-    editData(elements)
+    // editData(elements)
     bookDb.child(elements.id).set(elements)
-    navigation.pop()
+    navigation.navigate('Detail')
   }
 
   return (

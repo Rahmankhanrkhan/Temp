@@ -19,11 +19,9 @@ const CreateScreen = ({ navigation, data, word, addData }) => {
   }
   const updateBooks = () => {
     fireaBaseConfig.on('value', snap => {
-      console.log('dbData', snap.val().books)
       const books = snap.val().books
-      console.log('BOOKDS FROM DB:', books)
       addData(books)
-      navigation.pop()
+      navigation.navigate('Index')
     })
   }
 
@@ -56,8 +54,7 @@ const CreateScreen = ({ navigation, data, word, addData }) => {
 
 const mapStateToProps = state => {
   return {
-    data: state.data,
-    word: state.word
+    data: state.data
   }
 }
 export default connect(mapStateToProps, { addData })(CreateScreen)
