@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { View, Text, TextInput, Button, StyleSheet, Image, Keyboard } from 'react-native'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import Spacer from './Space'
 import * as ImagePicker from 'expo-image-picker';
+import { Context as AuthContext } from '../context/authContext';
 
 
 const FormField = ({ buttonText, onSubmit }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
-  const [state, setState] = useState({ image: null });
+  const [photoGallery, setPhotoGallary] = useState({ image: null });
+  const { state } = useContext(AuthContext)
 
   const pickImage = async () => {
     const imageResult = await ImagePicker.launchImageLibraryAsync({
@@ -20,7 +22,7 @@ const FormField = ({ buttonText, onSubmit }) => {
 
     console.log(imageResult);
     if (!imageResult.cancelled) {
-      setState({ image: imageResult });
+      setPhotoGallary({ image: imageResult });
     }
   };
 
@@ -48,10 +50,10 @@ const FormField = ({ buttonText, onSubmit }) => {
         <View style={styles.container} >
           <View>
             {
-              state.image ? (
+              photoGallery.image ? (
                 <View style={{ marginBottom: 10 }}  >
                   <Image
-                    source={{ uri: state.image.uri }}
+                    source={{ uri: photoGallery.image.uri }}
                     style={styles.imageStyle}
                   />
                 </View>
@@ -63,7 +65,7 @@ const FormField = ({ buttonText, onSubmit }) => {
                 )
             }
           </View>
-          {state.image ?
+          {photoGallery.image ?
             (
               <View style={styles.button} >
                 <Button title='change' onPress={pickImage} />
@@ -75,7 +77,7 @@ const FormField = ({ buttonText, onSubmit }) => {
         <View style={styles.button} >
           {title && author ? <Button
             title={buttonText}
-            onPress={() => onSubmit(title, author, state.image.uri)}
+            onPress={() => onSubmit(title, author, photoGallery.image.uri, state.userId)}
           /> : null}
         </View>
       </TouchableWithoutFeedback>

@@ -12,11 +12,14 @@ export const actionReducer = (state = [], action) => {
         const author = books[key].author
         const id = books[key].id
         const url = books[key].url
+        const userId = books[key].userId
+
         details.push({
           title,
           author,
           id,
-          url
+          url,
+          userId
         })
       }
       console.log('DETAILS FROM RED :', details)

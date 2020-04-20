@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Feather } from '@expo/vector-icons';
 import { connect } from 'react-redux'
@@ -6,13 +6,15 @@ import { FlatList, ScrollView, TouchableHighlight } from 'react-native-gesture-h
 import { bookDb } from '../actions/types';
 import fireaBaseConfig from '../config/fireBaseConfig';
 import { addData } from '../actions/actions';
+import { Context as authContext } from '../context/authContext';
 // import { deleteData } from '../actions/actions';
 
 const IndexScreen = ({ navigation, data, addData }) => {
-  const userId = navigation.getParam('userId')
-  console.log('TOKEN UNDEX', navigation.getParam('token'))
+  const { state, localUserId } = useContext(authContext)
+
 
   useEffect(() => {
+    localUserId()
     fireaBaseConfig.on('value', snap => {
       const books = snap.val().books;
       addData(books)
@@ -29,10 +31,11 @@ const IndexScreen = ({ navigation, data, addData }) => {
 
   return (
     <View>
+      <Text>{state.userId} </Text>
       <FlatList
         data={books}
         inverted
-        keyExtractor={books => books.id.toString()}
+        keyExtractor={books => books.id}
         renderItem={({ item }) => {
           return (
             <ScrollView

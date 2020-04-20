@@ -4,7 +4,7 @@ import { addData } from '../actions/actions';
 import { connect } from 'react-redux';
 import FormField from '../component/FormField';
 import { set } from 'react-native-reanimated';
-import { bookDb } from '../actions/types';
+import { bookDb, userUploadsDb } from '../actions/types';
 import fireaBaseConfig, { storage } from '../config/fireBaseConfig';
 
 
@@ -25,7 +25,7 @@ const CreateScreen = ({ navigation, data, word, addData }) => {
     })
   }
 
-  const onSubmit = (title, author, uri) => {
+  const onSubmit = (title, author, uri, userId) => {
     const id = new Date().getTime()
     uploadImage(uri, id).then(() => {
       storage.ref().child('images/' + id)
@@ -33,8 +33,9 @@ const CreateScreen = ({ navigation, data, word, addData }) => {
           alert('url received')
           console.log('DB URL', url)
           const elements = {
-            title, author, id, url
+            title, author, id, url, userId
           }
+          userUploadsDb.child(userId).child(id).set(elements)
           bookDb.child(id).set(elements)
           updateBooks()
         })
