@@ -14,13 +14,13 @@ const AuthForm = ({ headerText, onSubmit, submitButtonText, errorMessage }) => {
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
                 <View>
                     <Spacer>
-                        <Text h3> {headerText}  </Text>
+                        <Text style={styles.headerText} h3> {headerText}  </Text>
                     </Spacer>
 
                     <Spacer>
                         <Input
                             label='Email'
-                            value={email} 
+                            value={email}
                             onChangeText={setEmail}
                             autoCapitalize='none'
                             autoCorrect={false}
@@ -65,7 +65,11 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         fontSize: 20,
         justifyContent: 'center',
-        marginLeft: 150
+        // marginLeft: 150
+        textAlign: 'center'
+    },
+    headerText: {
+        textAlign: 'center'
     }
 })
 

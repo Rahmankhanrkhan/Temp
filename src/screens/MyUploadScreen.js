@@ -1,19 +1,62 @@
 import React, { useContext, useEffect } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, FlatList, StyleSheet, TouchableHighlight, ScrollView, Image } from 'react-native'
 import { Context as AuthContext } from '../context/authContext'
+import { connect } from 'react-redux'
 
-const MyUploadScreen = () => {
-  const { state, localUserId } = useContext(AuthContext)
+const MyUploadScreen = ({navigation, data }) => {
+  const { state } = useContext(AuthContext)
 
-  useEffect(() => {
-    localUserId()
-  }, [])
+  const { books } = data
+
+  const details = books.filter(info => info.userId === state.userId)
+  console.log('DETAIL IN MYUPLOADS', details)
+
   return (
     <View>
       <Text>MyUploadScreen</Text>
       <Text>{state.userId} </Text>
+      <FlatList
+        data={details}
+        inverted
+        keyExtractor={details => details.id}
+        renderItem={({ item }) => {
+          return (
+            <ScrollView
+              hideVerticalScrollIndicator={true} >
+              <View  >
+                <TouchableHighlight
+                  activeOpacity={0.9}
+                  underlayColor="white"
+                  onPress={() => navigation.navigate('Detail', { id: item.id })}
+                >
+                  <Image
+                    source={{ uri: item.url }}
+                    style={styles.imageStyle}
+                  />
+                </TouchableHighlight>
+              </View>
+            </ScrollView>
+          )
+        }}
+      />
     </View>
   )
 }
 
-export default MyUploadScreen
+const styles = StyleSheet.create({
+  imageStyle: {
+    alignSelf: 'center',
+    width: 400,
+    height: 250,
+    marginVertical: 20,
+    resizeMode: 'contain'
+  }
+})
+
+const mapStateToProps = state => {
+  return {
+    data: state.data
+  }
+}
+
+export default connect(mapStateToProps)(MyUploadScreen)

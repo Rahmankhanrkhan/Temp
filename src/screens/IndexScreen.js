@@ -31,10 +31,9 @@ const IndexScreen = ({ navigation, data, addData }) => {
 
   return (
     <View>
-      <Text>{state.userId} </Text>
       <FlatList
         data={books}
-        inverted
+        
         keyExtractor={books => books.id}
         renderItem={({ item }) => {
           return (
@@ -93,9 +92,10 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     alignSelf: 'center',
-    width: 300,
-    height: 200,
-    marginVertical: 20,
+    width: 400,
+    height: 250,
+    marginVertical: 10,
+    resizeMode:'contain'
   }
 })
 

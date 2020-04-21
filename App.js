@@ -23,6 +23,8 @@ const navigator = createSwitchNavigator({
   loginflow: createStackNavigator({
     Signup: SignupScreen,
     Signin: SigninScreen,
+    Myuplods: MyUploadScreen
+
   }),
   mainflow: createBottomTabNavigator({
     Books: createStackNavigator({
@@ -33,7 +35,6 @@ const navigator = createSwitchNavigator({
     }),
     MyProfile: createStackNavigator({
       Account: AccountScreen,
-      Myuplods: MyUploadScreen
     })
   })
 })

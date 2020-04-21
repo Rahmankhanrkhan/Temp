@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Spacer from '../component/Space';
 
 const DetailScreen = ({ navigation, data }) => {
+  
   const id = navigation.getParam('id')
   const { books } = data
   const detail = books.find(info => info.id === id)
@@ -21,7 +22,6 @@ const DetailScreen = ({ navigation, data }) => {
         />
         <Text style={styles.text} >Book Title  : {title} </Text>
         <Text style={styles.text} >Author Name : {author} </Text>
-        <Text style={styles.text}>Book ID :{id} </Text>
       </Spacer>
     </View>
   )
@@ -46,9 +46,10 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     alignSelf: 'center',
-    width: 300,
+    width: 400,
     height: 200,
     marginVertical: 20,
+    resizeMode: 'contain'
   }
 })
 
