@@ -12,7 +12,6 @@ const EditScreen = ({ navigation, data, editData }) => {
   const elements = {
    title, author,id
 }
-    // editData(elements)
     bookDb.child(elements.id).set(elements)
     navigation.navigate('Detail')
   }

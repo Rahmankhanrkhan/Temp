@@ -5,8 +5,6 @@ import { Context as AuthContext } from '../context/authContext';
 import Spacer from '../component/Space';
 
 const AccountScreen = ({ navigation }) => {
-    console.log('navigation:::', navigation)
-
     const { signOut } = useContext(AuthContext)
 
     return (

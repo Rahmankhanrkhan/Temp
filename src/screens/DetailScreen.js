@@ -14,7 +14,6 @@ const DetailScreen = ({ navigation, data, addData }) => {
   const id = navigation.getParam('id')
   const { books } = data
   const detail = books.find(info => info.id === id)
-  // console.log('detai', detail)
   const title = detail.title ? detail.title : <Text>No Data</Text>
   const author = detail.author ? detail.author : <Text>No Data</Text>
   const url = detail.url ? detail.url : null
@@ -26,10 +25,7 @@ const DetailScreen = ({ navigation, data, addData }) => {
   const buySubmit = async (state) => {
     const { userId } = state
     const buyerId = userId
-    // console.log('USERID IN DETAILS', userId)
-    // console.log('DETAILS', detail)
     const elements = { ...detail, buyerId }
-    // console.log('ELEMENTS DETAILS::', elements)
     await bookDb.child(id).set(elements)
     await fireaBaseConfig.on('value', snap => {
       const books = snap.val().books

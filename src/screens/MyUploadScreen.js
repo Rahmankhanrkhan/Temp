@@ -9,7 +9,6 @@ const MyUploadScreen = ({navigation, data }) => {
   const { books } = data
 
   const details = books.filter(info => info.userId === state.userId)
-  console.log('DETAIL IN MYUPLOADS', details)
 
   return (
     <View>

@@ -12,7 +12,6 @@ const MyPurchaseScreen = ({ navigation, data }) => {
 
   return (
     <View>
-      <Text>MyPurchaseScreen</Text>
       <FlatList
         data={details}
         inverted
