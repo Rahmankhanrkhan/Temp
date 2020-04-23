@@ -11,7 +11,7 @@ const authReducer = (state, action) => {
             return { ...state, errorMessage: '' }
         case 'signup':
             // console.log('action.payload:::',action.payload)
-            return { errorMessage: '', token: action.payload.token}
+            return { errorMessage: '', token: action.payload.token }
         case 'userId':
             return { userId: action.payload }
         case 'signout':
@@ -27,17 +27,17 @@ const clearMessage = dispatch => () => {
 
 const localUserId = dispatch => async () => {
     const userId = await AsyncStorage.getItem('userId')
-    console.log('USERID IN localUSER ID CONTEXT',userId)
+    console.log('USERID IN localUSER ID CONTEXT', userId)
     if (userId) {
         dispatch({ type: 'userId', payload: userId })
-    }else{
+    } else {
         console.log()
     }
 }
 
 const localSignin = dispatch => async () => {
     const token = await AsyncStorage.getItem('token')
-    console.log('LOCAL SIGN IN',token)
+    console.log('LOCAL SIGN IN', token)
     if (token) {
         dispatch({ type: 'signup', payload: token })
         const accessId = token
@@ -78,10 +78,11 @@ const signIn = dispatch => {
         try {
             const response = await trackerApi.post('/signin', { email, password })
             // console.log('response.data:::', response.data)
-            await AsyncStorage.setItem('token', response.data.token)
-            dispatch({ type: 'signup', payload: response.data.token })
-            const accessId = response.data.token
-            navigate('Index', ({ accessId }))
+            const token = response.data.token
+            const userId = response.data.userId
+            await AsyncStorage.setItem('token', token)
+            dispatch({ type: 'signup', payload: { token, userId } })
+            navigate('Index', ({ token }))
         }
         catch (err) {
             dispatch(

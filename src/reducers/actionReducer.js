@@ -4,7 +4,7 @@ export const actionReducer = (state = [], action) => {
   switch (action.type) {
     case add_Data:
       const { books } = action.payload
-      console.log('books in reducer:::', books)
+      // console.log('books in reducer:::', books)
 
       const details = []
       for (let key in books) {
@@ -13,13 +13,15 @@ export const actionReducer = (state = [], action) => {
         const id = books[key].id
         const url = books[key].url
         const userId = books[key].userId
+        const buyerId = books[key].buyerId
 
         details.push({
           title,
           author,
           id,
           url,
-          userId
+          userId,
+          buyerId
         })
       }
       console.log('DETAILS FROM RED :', details)

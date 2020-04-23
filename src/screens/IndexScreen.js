@@ -33,7 +33,7 @@ const IndexScreen = ({ navigation, data, addData }) => {
     <View>
       <FlatList
         data={books}
-        
+        inverted
         keyExtractor={books => books.id}
         renderItem={({ item }) => {
           return (

@@ -1,18 +1,41 @@
-import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
+import React, { useContext } from 'react'
+import { View, Text, TouchableOpacity, StyleSheet, Image, Button } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux'
 import Spacer from '../component/Space';
+import { Context as AuthContext } from '../context/authContext';
+import { bookDb } from '../actions/types';
+import fireaBaseConfig from '../config/fireBaseConfig';
+import { addData } from '../actions/actions';
 
-const DetailScreen = ({ navigation, data }) => {
-  
+const DetailScreen = ({ navigation, data, addData }) => {
+  const { state } = useContext(AuthContext)
+
   const id = navigation.getParam('id')
   const { books } = data
   const detail = books.find(info => info.id === id)
+  // console.log('detai', detail)
   const title = detail.title ? detail.title : <Text>No Data</Text>
   const author = detail.author ? detail.author : <Text>No Data</Text>
   const url = detail.url ? detail.url : null
+  const userId = detail.userId ? detail.userId : null
+  const uploaderId = userId
+  const buyerId = detail.buyerId ? detail.buyerId : null
+  console.log('userID, BuyerID:::', userId, state.userId, buyerId)
 
+  const buySubmit = async (state) => {
+    const { userId } = state
+    const buyerId = userId
+    // console.log('USERID IN DETAILS', userId)
+    // console.log('DETAILS', detail)
+    const elements = { ...detail, buyerId }
+    // console.log('ELEMENTS DETAILS::', elements)
+    await bookDb.child(id).set(elements)
+    await fireaBaseConfig.on('value', snap => {
+      const books = snap.val().books
+      addData(books)
+    })
+  }
   return (
     <View>
       <Spacer>
@@ -20,6 +43,16 @@ const DetailScreen = ({ navigation, data }) => {
           source={{ uri: url }}
           style={styles.imageStyle}
         />
+        {(uploaderId !== state.userId) && !buyerId ?
+          (<Button
+            color='green'
+            title='Purchase'
+            onPress={() => buySubmit(state)}
+          />)
+          : <Button
+            title = 'SOLD OUT'
+            color = 'red'
+          />}
         <Text style={styles.text} >Book Title  : {title} </Text>
         <Text style={styles.text} >Author Name : {author} </Text>
       </Spacer>
@@ -59,4 +92,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(DetailScreen)
+export default connect(mapStateToProps, { addData })(DetailScreen)

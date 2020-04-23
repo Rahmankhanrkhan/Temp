@@ -30,7 +30,6 @@ const CreateScreen = ({ navigation, data, word, addData }) => {
     uploadImage(uri, id).then(() => {
       storage.ref().child('images/' + id)
         .getDownloadURL().then((url) => {
-          alert('url received')
           console.log('DB URL', url)
           const elements = {
             title, author, id, url, userId

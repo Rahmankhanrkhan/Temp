@@ -5,7 +5,7 @@ import { Context as AuthContext } from '../context/authContext';
 import Spacer from '../component/Space';
 
 const AccountScreen = ({ navigation }) => {
-    console.log('navigation:::',navigation)
+    console.log('navigation:::', navigation)
 
     const { signOut } = useContext(AuthContext)
 
@@ -16,6 +16,12 @@ const AccountScreen = ({ navigation }) => {
                 <Button
                     title='My Uploads'
                     onPress={() => navigation.navigate('Myuplods')}
+                />
+            </Spacer>
+            <Spacer>
+                <Button
+                    title='My Purchase'
+                    onPress={() => navigation.navigate('MyPurchase')}
                 />
             </Spacer>
             <Spacer>

@@ -13,28 +13,28 @@ import CreateScreen from './src/screens/CreateScreen';
 import EditScreen from './src/screens/EditScreen';
 import DetailScreen from './src/screens/DetailScreen';
 import AccountScreen from './src/screens/AccountScreen';
-
 import { Provider as AuthProvider } from './src/context/authContext'
 import { setNavigator } from './src/navigationRef';
 import MyUploadScreen from './src/screens/MyUploadScreen';
+import MyPurchaseScreen from './src/screens/MyPurchaseScreen';
 
 const navigator = createSwitchNavigator({
   Resolve: ResolveAuthScreen,
   loginflow: createStackNavigator({
     Signup: SignupScreen,
-    Signin: SigninScreen,
-    Myuplods: MyUploadScreen
-
+    Signin: SigninScreen
   }),
   mainflow: createBottomTabNavigator({
     Books: createStackNavigator({
       Index: IndexScreen,
       Create: CreateScreen,
       Detail: DetailScreen,
-      Edit: EditScreen,
+      Edit: EditScreen
     }),
     MyProfile: createStackNavigator({
       Account: AccountScreen,
+      Myuplods: MyUploadScreen,
+      MyPurchase: MyPurchaseScreen
     })
   })
 })
